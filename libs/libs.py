@@ -48,7 +48,7 @@ def check_models(X: pd.DataFrame, y: pd.Series) -> pd.DataFrame:
     acc_sgd = round(sgd.score(X, y), 2)
 
     # Decision Tree
-    decision_tree = DecisionTreeClassifier()
+    decision_tree = DecisionTreeClassifier(max_depth=depth)
     decision_tree.fit(X, y)
     acc_decision_tree = round(decision_tree.score(X, y), 2)
 
@@ -58,13 +58,24 @@ def check_models(X: pd.DataFrame, y: pd.Series) -> pd.DataFrame:
     acc_random_forest = round(random_forest.score(X, y), 2)
 
     models = pd.DataFrame({
-        'Model': ['Support Vector Machines', 'KNN', 'Logistic Regression',
-                  'Random Forest', 'Naive Bayes', 'Perceptron',
-                  'Stochastic Gradient Decent', 'Linear SVC',
+        'Model': ['Support Vector Machines',
+                  'KNN',
+                  'Logistic Regression',
+                  'Random Forest',
+                  'Naive Bayes',
+                  'Perceptron',
+                  'Stochastic Gradient Decent',
+                  'Linear SVC',
                   'Decision Tree'],
-        'Score': [acc_svc, acc_knn, acc_log,
-                  acc_random_forest, acc_gaussian, acc_perceptron,
-                  acc_sgd, acc_linear_svc, acc_decision_tree]})
+        'Score': [acc_svc,
+                  acc_knn,
+                  acc_log,
+                  acc_random_forest,
+                  acc_gaussian,
+                  acc_perceptron,
+                  acc_sgd,
+                  acc_linear_svc,
+                  acc_decision_tree]})
 
     models.sort_values(by='Score', ascending=False, inplace=True)
 
